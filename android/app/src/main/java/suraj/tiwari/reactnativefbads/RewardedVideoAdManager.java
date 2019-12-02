@@ -95,7 +95,7 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
                 WritableMap map = Arguments.createMap();
                 map.putBoolean("rewarded", true);
                 map.putBoolean("closed", false);
-                sendEvent(reactContext, "onRewarded", map);
+                sendEvent(mContext, "onRewarded", map);
                 mShowPromise.resolve(true);
                 cleanUp();
             }
@@ -105,7 +105,7 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
                 WritableMap map = Arguments.createMap();
                 map.putBoolean("rewarded", false);
                 map.putBoolean("closed", true);
-                sendEvent(reactContext, "onClosed", map);
+                sendEvent(mContext, "onClosed", map);
                 // The Rewarded Video ad was closed - this can occur during the video
                 // by closing the app, or closing the end card.
                 Log.d(TAG, "Rewarded video ad closed!");
