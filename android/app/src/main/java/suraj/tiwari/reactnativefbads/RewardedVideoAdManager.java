@@ -9,6 +9,8 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.bridge.Arguments;
 
 import android.util.Log;
 
@@ -86,12 +88,19 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
                 // Rewarded Video View Complete - the video has been played to the end.
                 // You can use this event to initialize your reward
                 Log.d(TAG, "Rewarded video completed!");
-                mShowPromise.resolve(true);
+                WritableMap map = Arguments.createMap();
+                map.putBoolean('rewarded', true);
+                map.putBoolean('closed', false);
+                mShowPromise.resolve(map);
                 cleanUp();
             }
 
             @Override
             public void onRewardedVideoClosed() {
+                WritableMap map = Arguments.createMap();
+                map.putBoolean('rewarded', false);
+                map.putBoolean('closed', true);
+                mShowPromise.resolve(map);
                 // The Rewarded Video ad was closed - this can occur during the video
                 // by closing the app, or closing the end card.
                 Log.d(TAG, "Rewarded video ad closed!");
