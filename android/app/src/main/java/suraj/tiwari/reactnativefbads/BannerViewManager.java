@@ -40,7 +40,7 @@ public class BannerViewManager extends SimpleViewManager<BannerView> {
 
   @Override
   protected BannerView createViewInstance(ThemedReactContext reactContext) {
-    ReactViewGroup viewGroup = new ReactViewGroup(themedReactContext);
+    ReactViewGroup viewGroup = new ReactViewGroup(reactContext);
     BannerView bannerView = new BannerView(reactContext);
     viewGroup.addView(bannerView);
     return viewGroup;
