@@ -10,11 +10,10 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.views.view.ReactViewGroup;
 
 import java.util.Map;
 
-public class BannerViewManager extends SimpleViewManager<ReactViewGroup> {
+public class BannerViewManager extends SimpleViewManager<BannerView> {
   @ReactProp(name = "placementId")
   public void setPlacementId(BannerView view, String placementId) {
     view.setPlacementId(placementId);
@@ -39,11 +38,8 @@ public class BannerViewManager extends SimpleViewManager<ReactViewGroup> {
   }
 
   @Override
-  protected ReactViewGroup createViewInstance(ThemedReactContext reactContext) {
-    ReactViewGroup viewGroup = new ReactViewGroup(reactContext);
-    BannerView bannerView = new BannerView(reactContext);
-    viewGroup.addView(bannerView);
-    return viewGroup;
+  protected BannerView createViewInstance(ThemedReactContext reactContext) {
+    return new BannerView(reactContext);
   }
 
   @Override
