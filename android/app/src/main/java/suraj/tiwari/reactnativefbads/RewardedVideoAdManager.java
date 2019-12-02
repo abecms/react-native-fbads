@@ -89,8 +89,8 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
                 // You can use this event to initialize your reward
                 Log.d(TAG, "Rewarded video completed!");
                 WritableMap map = Arguments.createMap();
-                map.putBoolean('rewarded', true);
-                map.putBoolean('closed', false);
+                map.putBoolean("rewarded", true);
+                map.putBoolean("closed", false);
                 mShowPromise.resolve(map);
                 cleanUp();
             }
@@ -98,8 +98,8 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
             @Override
             public void onRewardedVideoClosed() {
                 WritableMap map = Arguments.createMap();
-                map.putBoolean('rewarded', false);
-                map.putBoolean('closed', true);
+                map.putBoolean("rewarded", false);
+                map.putBoolean("closed", true);
                 mShowPromise.resolve(map);
                 // The Rewarded Video ad was closed - this can occur during the video
                 // by closing the app, or closing the end card.
