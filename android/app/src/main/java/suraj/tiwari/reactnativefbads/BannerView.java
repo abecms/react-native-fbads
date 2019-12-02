@@ -65,6 +65,8 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
       : r.getDisplayMetrics().widthPixels;
     int pxH = dp2px(mSize.getHeight(), dm);
 
+    pxW -= dp2px(40, dm);
+
     myAdView.measure(pxW, pxH);
     myAdView.layout(0, 0, pxW, pxH);
 
@@ -87,8 +89,6 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     if (myAdView == null && mPlacementId != null && mSize != null) {
       myAdView = new AdView(this.getContext(), mPlacementId, mSize);
       myAdView.setAdListener(this);
-
-      Log.d("BannerView", String.valueOf(myAdView.getWidth()));
 
       myAdView.loadAd();
     }
