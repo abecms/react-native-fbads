@@ -10,6 +10,7 @@ import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.views.view.ReactViewGroup;
 
 import java.util.Map;
 
@@ -39,7 +40,10 @@ public class BannerViewManager extends SimpleViewManager<BannerView> {
 
   @Override
   protected BannerView createViewInstance(ThemedReactContext reactContext) {
-    return new BannerView(reactContext);
+    ReactViewGroup viewGroup = new ReactViewGroup(themedReactContext);
+    BannerView bannerView = new BannerView(reactContext);
+    viewGroup.addView(bannerView);
+    return viewGroup;
   }
 
   @Override
