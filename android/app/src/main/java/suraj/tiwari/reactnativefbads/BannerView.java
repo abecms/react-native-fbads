@@ -16,8 +16,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.LinearLayout;
+
 
 public class BannerView extends ReactViewGroup implements AdListener, LifecycleEventListener {
 
@@ -59,7 +58,7 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
   public void onAdLoaded(Ad ad) {
     this.removeAllViews();
 
-    /*Resources r = mContext.getResources();
+    Resources r = mContext.getResources();
     DisplayMetrics dm = r.getDisplayMetrics();
     int pxW = mSize.getWidth() > 0 ?
       dp2px(mSize.getWidth(), dm)
@@ -67,7 +66,9 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     int pxH = dp2px(mSize.getHeight(), dm);
 
     myAdView.measure(pxW, pxH);
-    myAdView.layout(0, 0, pxW, pxH);*/
+    myAdView.layout(0, 0, pxW, pxH);
+
+    addView(myAdView);
 
     mEventEmitter.receiveEvent(getId(), "onAdLoad", null);
   }
@@ -86,13 +87,6 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     if (myAdView == null && mPlacementId != null && mSize != null) {
       myAdView = new AdView(this.getContext(), mPlacementId, mSize);
       myAdView.setAdListener(this);
-
-      LinearLayout rootView = new LinearLayout(this.getContext());
-      rootView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-      rootView.setOrientation(LinearLayout.VERTICAL);
-      rootView.addView(myAdView);
-
-      addView(rootView);
 
       myAdView.loadAd();
     }
