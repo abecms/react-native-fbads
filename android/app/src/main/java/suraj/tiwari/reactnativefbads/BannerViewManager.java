@@ -31,7 +31,7 @@ public class BannerViewManager extends SimpleViewManager<BannerView> {
         break;
       case 50:
       default:
-        adSize = AdSize.BANNER_HEIGHT_50;
+        adSize = AdSize.BANNER_320_50;
         break;
     }
     view.setSize(adSize);
