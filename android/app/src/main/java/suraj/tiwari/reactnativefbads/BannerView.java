@@ -60,12 +60,10 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
 
     Resources r = mContext.getResources();
     DisplayMetrics dm = r.getDisplayMetrics();
-//     int pxW = mSize.getWidth() > 0 ?
-//       dp2px(mSize.getWidth(), dm)
-//       : r.getDisplayMetrics().widthPixels;
+    int pxW = mSize.getWidth() > 0 ?
+      dp2px(mSize.getWidth(), dm)
+      : r.getDisplayMetrics().widthPixels;
     int pxH = dp2px(mSize.getHeight(), dm);
-
-    int pxW = 50;
 
     myAdView.measure(pxW, pxH);
     myAdView.layout(0, 0, pxW, pxH);
