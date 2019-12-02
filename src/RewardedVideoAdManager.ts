@@ -12,7 +12,7 @@ export default {
     /**
      * shows the loaded rewarded video ad, returns a promise
      */
-    showAd(): Promise<any> {
+    showAd(): Promise<boolean> {
         return CTKRewardedVideoAdManager.showAd();
     }
 };

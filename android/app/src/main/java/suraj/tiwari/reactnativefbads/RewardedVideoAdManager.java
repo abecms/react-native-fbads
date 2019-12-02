@@ -11,11 +11,14 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.bridge.ReactContext;
 
 import android.util.Log;
 
 public class RewardedVideoAdManager extends ReactContextBaseJavaModule implements LifecycleEventListener {
 
+    private ReactContext mContext;
     private Promise mLoadedPromise = null;
     private Promise mShowPromise = null;
 
@@ -26,7 +29,8 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
 
     public RewardedVideoAdManager(ReactApplicationContext reactContext) {
         super(reactContext);
-        reactContext.addLifecycleEventListener(this);
+        mContext = reactContext;
+        mContext.addLifecycleEventListener(this);
     }
 
     @ReactMethod
@@ -91,7 +95,8 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
                 WritableMap map = Arguments.createMap();
                 map.putBoolean("rewarded", true);
                 map.putBoolean("closed", false);
-                mShowPromise.resolve(map);
+                sendEvent(reactContext, "onRewarded", map);
+                mShowPromise.resolve(true);
                 cleanUp();
             }
 
@@ -100,7 +105,7 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
                 WritableMap map = Arguments.createMap();
                 map.putBoolean("rewarded", false);
                 map.putBoolean("closed", true);
-                mShowPromise.resolve(map);
+                sendEvent(reactContext, "onClosed", map);
                 // The Rewarded Video ad was closed - this can occur during the video
                 // by closing the app, or closing the end card.
                 Log.d(TAG, "Rewarded video ad closed!");
@@ -137,5 +142,11 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
         mRewardedVideoAd.destroy();
         mRewardedVideoAd = null;
     }
+  }
+
+  private void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
+    reactContext
+        .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+        .emit(eventName, params);
   }
 }
