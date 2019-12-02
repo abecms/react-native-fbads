@@ -16,7 +16,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
-
+import android.util.Log;
 
 public class BannerView extends ReactViewGroup implements AdListener, LifecycleEventListener {
 
@@ -87,6 +87,8 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     if (myAdView == null && mPlacementId != null && mSize != null) {
       myAdView = new AdView(this.getContext(), mPlacementId, mSize);
       myAdView.setAdListener(this);
+
+      Log.d("BannerView", myAdView.getWidth());
 
       myAdView.loadAd();
     }
