@@ -14,7 +14,7 @@ import com.facebook.react.views.view.ReactViewGroup;
 
 import java.util.Map;
 
-public class BannerViewManager extends SimpleViewManager<BannerView> {
+public class BannerViewManager extends SimpleViewManager<ReactViewGroup> {
   @ReactProp(name = "placementId")
   public void setPlacementId(BannerView view, String placementId) {
     view.setPlacementId(placementId);
