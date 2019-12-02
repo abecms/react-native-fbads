@@ -88,7 +88,7 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
       myAdView = new AdView(this.getContext(), mPlacementId, mSize);
       myAdView.setAdListener(this);
 
-      Log.d("BannerView", myAdView.getWidth());
+      Log.d("BannerView", String.valueOf(myAdView.getWidth()));
 
       myAdView.loadAd();
     }
