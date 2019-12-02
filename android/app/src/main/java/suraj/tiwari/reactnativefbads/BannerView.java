@@ -17,6 +17,7 @@ import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 import android.util.Log;
+import com.facebook.react.uimanager.PixelUtil;
 
 public class BannerView extends ReactViewGroup implements AdListener, LifecycleEventListener {
 
@@ -60,9 +61,10 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
 
     Resources r = mContext.getResources();
     DisplayMetrics dm = r.getDisplayMetrics();
-    int pxW = mSize.getWidth() > 0 ?
-      dp2px(mSize.getWidth(), dm)
-      : r.getDisplayMetrics().widthPixels;
+//     int pxW = mSize.getWidth() > 0 ?
+//       dp2px(mSize.getWidth(), dm)
+//       : r.getDisplayMetrics().widthPixels;
+    int pxW = 320;
     int pxH = dp2px(mSize.getHeight(), dm);
 
     myAdView.measure(pxW, pxH);
