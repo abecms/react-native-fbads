@@ -20,7 +20,7 @@ public class BannerViewManager extends SimpleViewManager<BannerView> {
   }
 
    @ReactProp(name = "width")
-   public void setWidth(int width) {
+   public void setWidth(BannerView view, int width) {
      view.setWidth(width);
    }
 
