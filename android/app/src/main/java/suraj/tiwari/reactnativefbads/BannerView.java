@@ -25,6 +25,7 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
   private String mPlacementId;
   private AdSize mSize;
   private RCTEventEmitter mEventEmitter;
+  private int mWidth = 0;
 
   public BannerView(ThemedReactContext context) {
     super(context);
@@ -43,6 +44,11 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     createAdViewIfCan();
   }
 
+  public void setWidth(int width) {
+      mWidth = width;
+      createAdViewIfCan();
+    }
+
   @Override
   public void onError(Ad ad, AdError adError) {
     WritableMap event = Arguments.createMap();
@@ -60,9 +66,16 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
 
     Resources r = mContext.getResources();
     DisplayMetrics dm = r.getDisplayMetrics();
-    int pxW = mSize.getWidth() > 0 ?
-      dp2px(mSize.getWidth(), dm)
-      : r.getDisplayMetrics().widthPixels;
+    int pxW;
+
+    if (mSize.getWidth() > 0) {
+      pxW = dp2px(mSize.getWidth(), dm);
+    } else if (mWidth > 0) {
+      pxW = dp2px(mWidth, dm);
+    } else {
+      pxW = r.getDisplayMetrics().widthPixels;
+    }
+
     int pxH = dp2px(mSize.getHeight(), dm);
 
     myAdView.measure(pxW, pxH);
