@@ -144,7 +144,7 @@ public class RewardedVideoAdManager extends ReactContextBaseJavaModule implement
     }
   }
 
-  private void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
+  private void sendEvent(ReactContext reactContext, String eventName, WritableMap params) {
     reactContext
         .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
         .emit(eventName, params);
