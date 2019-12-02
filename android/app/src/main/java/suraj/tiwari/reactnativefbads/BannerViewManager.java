@@ -19,11 +19,6 @@ public class BannerViewManager extends SimpleViewManager<BannerView> {
     view.setPlacementId(placementId);
   }
 
-   @ReactProp(name = "width")
-   public void setWidth(BannerView view, int width) {
-     view.setWidth(width);
-   }
-
   @ReactProp(name = "size")
   public void setSize(BannerView view, int size) {
     AdSize adSize = null;

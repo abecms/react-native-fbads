@@ -19,7 +19,6 @@ interface BannerViewProps {
   onError: Function;
   onLoad: Function;
   style: StyleProp<ViewStyle>;
-  width: number;
 }
 
 // tslint:disable-next-line:variable-name
@@ -37,13 +36,12 @@ const getSizeForType = (type: AdType) => sizeForType[type];
 
 // tslint:disable-next-line:variable-name
 const BannerView = (props: BannerViewProps) => {
-  const { type, onPress, onError, onLoad, style, width, ...restProps } = props;
+  const { type, onPress, onError, onLoad, style, ...restProps } = props;
   const size = getSizeForType(type);
 
   return (
     <CTKBannerView
       size={size}
-      width={width}
       onAdPress={onPress}
       onAdError={onError}
       onAdLoad={onLoad}
