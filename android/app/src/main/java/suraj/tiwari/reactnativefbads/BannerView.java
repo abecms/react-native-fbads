@@ -69,13 +69,6 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     myAdView.measure(pxW, pxH);
     myAdView.layout(0, 0, pxW, pxH);*/
 
-    LinearLayout rootView = new LinearLayout(this.getContext());
-    rootView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-    rootView.setOrientation(LinearLayout.VERTICAL);
-    rootView.addView(myAdView);
-
-    addView(rootView);
-
     mEventEmitter.receiveEvent(getId(), "onAdLoad", null);
   }
 
@@ -93,6 +86,13 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
     if (myAdView == null && mPlacementId != null && mSize != null) {
       myAdView = new AdView(this.getContext(), mPlacementId, mSize);
       myAdView.setAdListener(this);
+
+      LinearLayout rootView = new LinearLayout(this.getContext());
+      rootView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+      rootView.setOrientation(LinearLayout.VERTICAL);
+      rootView.addView(myAdView);
+
+      addView(rootView);
 
       myAdView.loadAd();
     }
