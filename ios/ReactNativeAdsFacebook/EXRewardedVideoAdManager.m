@@ -29,7 +29,7 @@
 RCT_EXPORT_MODULE(CTKRewardedVideoAdManager)
 
 - (NSArray<NSString *> *)supportedEvents {
-    return @[@"RewardedVideoAdManager"];
+    return @[@"onRewarded",@"onClosed"];
 }
 
 - (void)setBridge:(RCTBridge *)bridge
