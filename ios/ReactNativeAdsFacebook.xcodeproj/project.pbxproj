@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AC76D852396B3EB003889E6 /* EXRewardedVideoAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AC76D842396B3EB003889E6 /* EXRewardedVideoAdManager.m */; };
 		D2AFD378211B15F300580DF0 /* EXNativeAdManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AFD366211B15F300580DF0 /* EXNativeAdManager.m */; };
 		D2AFD379211B15F300580DF0 /* EXNativeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AFD368211B15F300580DF0 /* EXNativeAdView.m */; };
 		D2AFD37A211B15F300580DF0 /* EXBannerViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AFD36A211B15F300580DF0 /* EXBannerViewManager.m */; };
@@ -33,6 +34,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AC76D842396B3EB003889E6 /* EXRewardedVideoAdManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EXRewardedVideoAdManager.m; sourceTree = "<group>"; };
+		1AC76D872396B453003889E6 /* EXRewardedVideoAdManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EXRewardedVideoAdManager.h; sourceTree = "<group>"; };
 		D2AFD333211B138E00580DF0 /* libReactNativeAdsFacebook.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReactNativeAdsFacebook.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AFD366211B15F300580DF0 /* EXNativeAdManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXNativeAdManager.m; sourceTree = "<group>"; };
 		D2AFD367211B15F300580DF0 /* EXNativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXNativeAdView.h; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				D2AFD6602121FD8200580DF0 /* EXUnversioned.h */,
 				D2AFD6622122391200580DF0 /* AdChoiceManager.h */,
 				D2AFD6632122392E00580DF0 /* AdChoiceManager.m */,
+				1AC76D842396B3EB003889E6 /* EXRewardedVideoAdManager.m */,
+				1AC76D872396B453003889E6 /* EXRewardedVideoAdManager.h */,
 			);
 			path = ReactNativeAdsFacebook;
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 				D2AFD6642122392E00580DF0 /* AdChoiceManager.m in Sources */,
 				D2AFD37A211B15F300580DF0 /* EXBannerViewManager.m in Sources */,
 				D2AFD37B211B15F300580DF0 /* EXBannerView.m in Sources */,
+				1AC76D852396B3EB003889E6 /* EXRewardedVideoAdManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
