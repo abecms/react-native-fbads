@@ -19,6 +19,7 @@
 @property (nonatomic, strong) RCTPromiseResolveBlock showResolve;
 @property (nonatomic, strong) RCTPromiseRejectBlock showReject;
 @property (nonatomic, strong) FBRewardedVideoAd *rewardedVideoAd;
+@property (nonatomic, strong) UIViewController *adViewController;
 
 @end
 
@@ -26,7 +27,7 @@
 
 @synthesize bridge = _bridge;
 
-RCT_EXPORT_MODULE(CTKRewardedVideoAdManager)
+RCT_EXPORT_MODULE(CTKRewardedVideoAdManager);
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[@"onRewarded",@"onClosed"];
@@ -34,30 +35,30 @@ RCT_EXPORT_MODULE(CTKRewardedVideoAdManager)
 
 - (void)setBridge:(RCTBridge *)bridge
 {
+    
   _bridge = bridge;
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(bridgeDidForeground:)
                                                name:EX_UNVERSIONED(@"EXKernelBridgeDidForegroundNotification")
                                              object:self.bridge];
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(bridgeDidBackground:)
-                                               name:EX_UNVERSIONED(@"EXKernelBridgeDidBackgroundNotification")
-                                             object:self.bridge];
+  selector:@selector(bridgeDidBackground:)
+      name:EX_UNVERSIONED(@"EXKernelBridgeDidBackgroundNotification")
+    object:self.bridge];
 }
 
 RCT_EXPORT_METHOD(
-  resolver:(RCTPromiseResolveBlock)resolve
+  showAd:(RCTPromiseResolveBlock)resolve
   rejecter:(RCTPromiseRejectBlock)reject
 )
 {
   RCTAssert(_showResolve == nil && _showReject == nil, @"Only one `showAd` can be called at once");
 
-  if (_rewardedVideoAd != nil && [_rewardedVideoAd isAdValid]) {
-      [_rewardedVideoAd loadAd];
-   _showResolve = resolve;
-   _showReject = reject;
+  if (_rewardedVideoAd != nil && _rewardedVideoAd.isAdValid) {
+    [self->_rewardedVideoAd showAdFromRootViewController:RCTPresentedViewController()];
+    _showResolve = resolve;
+    _showReject = reject;
   }
 }
 
@@ -98,10 +99,10 @@ RCT_EXPORT_METHOD(
   
 }
 
-- (void) rewardedVideoAdComplete:(FBRewardedVideoAd *)rewardedVideoAd
+- (void) rewardedVideoAdVideoComplete:(FBRewardedVideoAd *)rewardedVideoAd
 {
   RCTLogInfo(@"Rewarded video completed!");
-  [self sendEventWithName:@"onRewarded" body:@{ @"RewardedVideoAdManager": @(TRUE), @"closed": @(FALSE) }];
+  [self sendEventWithName:@"onRewarded" body:@{ @"rewarded": @(TRUE), @"closed": @(FALSE) }];
   _showResolve(@(TRUE));
   [self cleanUpAd];
 }
@@ -109,8 +110,24 @@ RCT_EXPORT_METHOD(
 - (void)rewardedVideoAdDidClose:(FBRewardedVideoAd *)rewardedVideoAd
 {
   RCTLogInfo(@"Rewarded video ad closed!");
-  [self sendEventWithName:@"onClosed" body:@{ @"RewardedVideoAdManager": @(FALSE), @"closed": @(TRUE) }];
+  [self sendEventWithName:@"onClosed" body:@{ @"rewarded": @(FALSE), @"closed": @(TRUE) }];
   [self cleanUpAd];
+}
+
+- (void)bridgeDidForeground:(NSNotification *)notification
+{
+  if (_adViewController) {
+    [RCTPresentedViewController() presentViewController:_adViewController animated:NO completion:nil];
+    _adViewController = nil;
+  }
+}
+
+- (void)bridgeDidBackground:(NSNotification *)notification
+{
+  if (_adViewController) {
+    _adViewController = RCTPresentedViewController();
+    [_adViewController dismissViewControllerAnimated:NO completion:nil];
+  }
 }
 
 - (void)cleanUpAd
@@ -120,6 +137,7 @@ RCT_EXPORT_METHOD(
   _showResolve = nil;
   _showReject = nil;
   _rewardedVideoAd = nil;
+  _adViewController = nil;
 }
 
 @end
