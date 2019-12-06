@@ -25,27 +25,11 @@
 
 @implementation EXRewardedVideoAdManager
 
-@synthesize bridge = _bridge;
-
 RCT_EXPORT_MODULE(CTKRewardedVideoAdManager);
 
-- (NSArray<NSString *> *)supportedEvents {
-    return @[@"onRewarded",@"onClosed"];
-}
-
-- (void)setBridge:(RCTBridge *)bridge
+- (NSArray<NSString *> *)supportedEvents
 {
-    
-  _bridge = bridge;
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(bridgeDidForeground:)
-                                               name:EX_UNVERSIONED(@"EXKernelBridgeDidForegroundNotification")
-                                             object:self.bridge];
-  [[NSNotificationCenter defaultCenter] addObserver:self
-  selector:@selector(bridgeDidBackground:)
-      name:EX_UNVERSIONED(@"EXKernelBridgeDidBackgroundNotification")
-    object:self.bridge];
+    return @[@"onRewarded",@"onClosed"];
 }
 
 RCT_EXPORT_METHOD(
@@ -112,22 +96,6 @@ RCT_EXPORT_METHOD(
   RCTLogInfo(@"Rewarded video ad closed!");
   [self sendEventWithName:@"onClosed" body:@{ @"rewarded": @(FALSE), @"closed": @(TRUE) }];
   [self cleanUpAd];
-}
-
-- (void)bridgeDidForeground:(NSNotification *)notification
-{
-  if (_adViewController) {
-    [RCTPresentedViewController() presentViewController:_adViewController animated:NO completion:nil];
-    _adViewController = nil;
-  }
-}
-
-- (void)bridgeDidBackground:(NSNotification *)notification
-{
-  if (_adViewController) {
-    _adViewController = RCTPresentedViewController();
-    [_adViewController dismissViewControllerAnimated:NO completion:nil];
-  }
 }
 
 - (void)cleanUpAd
