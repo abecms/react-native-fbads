@@ -111,6 +111,7 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
   @Override
   public void onHostDestroy() {
     if (myAdView != null) {
+      Log.d("BannerView", "Destroy banner view");
       myAdView.destroy();
     }
   }
