@@ -100,19 +100,15 @@ public class BannerView extends ReactViewGroup implements AdListener, LifecycleE
 
   @Override
   public void onHostResume() {
-    Log.d("BannerView", "onHostResume");
   }
 
   @Override
   public void onHostPause() {
-    Log.d("BannerView", "onHostPause");
   }
 
   @Override
   public void onHostDestroy() {
-    Log.d("BannerView", "onHostDestroy");
     if (myAdView != null) {
-      Log.d("BannerView", "Destroy banner view");
       myAdView.destroy();
     }
   }
