@@ -37,13 +37,15 @@ RCT_EXPORT_METHOD(
   rejecter:(RCTPromiseRejectBlock)reject
 )
 {
-  RCTAssert(_showResolve == nil && _showReject == nil, @"Only one `showAd` can be called at once");
+  dispatch_async(dispatch_get_main_queue(), ^{ 
+    RCTAssert(_showResolve == nil && _showReject == nil, @"Only one `showAd` can be called at once");
 
-  if (_rewardedVideoAd != nil && _rewardedVideoAd.isAdValid) {
-    [self->_rewardedVideoAd showAdFromRootViewController:RCTPresentedViewController()];
-    _showResolve = resolve;
-    _showReject = reject;
-  }
+    if (_rewardedVideoAd != nil && _rewardedVideoAd.isAdValid) {
+      [self->_rewardedVideoAd showAdFromRootViewController:RCTPresentedViewController()];
+      _showResolve = resolve;
+      _showReject = reject;
+    }
+  });
 }
 
 RCT_EXPORT_METHOD(
