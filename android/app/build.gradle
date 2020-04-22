@@ -20,11 +20,12 @@ android {
 }
 
 repositories {
+    google()
     jcenter()
-    maven { url 'https://maven.google.com' }
 }
 
 dependencies {
+    implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'com.facebook.react:react-native:+'
     implementation "com.android.support:recyclerview-v7:${safeExtGet('supportLibVersion', '26.1.0')}"
     implementation 'com.facebook.android:audience-network-sdk:5.+'
